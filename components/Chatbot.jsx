@@ -15,18 +15,19 @@ export default function Chatbot() {
   async function handleSend() {
     if (!input.trim()) return;
 
+    let botReply;
     const newMessage = { sender: "user", text: input };
     setMessages((prev) => [...prev, newMessage]);
     setInput("");
     setIsLoading(true);
 
-
     try {
-      const botReply = await sendMessage(input, messages);
-      setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
+      botReply = await sendMessage(input, messages);
     } catch (error) {
-      setMessages((prev) => [...prev, { sender: "bot", text: "Oops! Something went wrong. Please try again." }]);
+      botReply = "Oops! Something went wrong. Please try again."
     }
+
+    setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
     setIsLoading(false);
   }
 
