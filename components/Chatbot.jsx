@@ -20,8 +20,13 @@ export default function Chatbot() {
     setInput("");
     setIsLoading(true);
 
-    const botReply = await sendMessage(input, messages);
-    setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
+
+    try {
+      const botReply = await sendMessage(input, messages);
+      setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
+    } catch (error) {
+      setMessages((prev) => [...prev, { sender: "bot", text: "Oops! Something went wrong. Please try again." }]);
+    }
     setIsLoading(false);
   }
 
