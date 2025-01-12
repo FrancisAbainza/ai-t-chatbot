@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import styles from './Chatbot.module.css';
-import { sendMessage } from '@/lib/actions';
+import { sendMessageAction } from '@/lib/actions.js';
 
 export default function Chatbot() {
   const [messages, setMessages] = useState([
@@ -22,7 +22,7 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      botReply = await sendMessage(input, messages);
+      botReply = await sendMessageAction(input, messages);
     } catch (error) {
       botReply = "Oops! Something went wrong. Please try again."
     }
