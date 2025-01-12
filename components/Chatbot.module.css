@@ -1,0 +1,101 @@
+.chatbot {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #3F3F3F;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 37.5em;
+  height: 31.25em;
+}
+
+.chatWindow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-s);
+  overflow-y: auto;
+}
+
+.chatWindow::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chatWindow::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px; 
+}
+
+
+.chatWindow::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+
+.chatWindow::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.message {
+  border-radius: 12px;
+  padding: var(--space-xs);
+  max-width: 90%;
+}
+
+.message pre {
+  border: 2px solid #3F3F3F;
+  border-radius: 12px;
+  white-space: pre-wrap; /* or pre-line; */
+  overflow-x: auto; /* Add horizontal scroll if needed for very long lines of code */
+  max-width: 100%; /* Prevent code blocks from being wider than the message */
+  padding: var(--space-xs); /* Add some padding */
+}
+
+.message > * {
+  color: inherit;
+}
+
+.message ul,
+.message ol {
+  list-style-position: inside;
+}
+
+.message li ul {
+  margin-left: 20px; /* Indent the nested <ul> */
+}
+
+.message li ol {
+  margin-left: 20px; /* Indent the nested <ol> */
+}
+
+.loadingIndicator {
+  opacity: .5;
+}
+
+.inputContainer {
+  display: flex;
+  border-top: 2px solid #3F3F3F;
+  border-top-right-radius: 12px;
+}
+
+.input {
+  flex: 1;
+  outline: none;
+  border: none;
+  padding: var(--space-xs);
+  background-color: transparent;
+}
+
+.button {
+  border: none;
+  border-radius: 12px;
+  padding: var(--space-xs);
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgb(219, 219, 219);
+}
