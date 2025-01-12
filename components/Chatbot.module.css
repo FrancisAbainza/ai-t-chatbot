@@ -69,6 +69,10 @@
   margin-left: 20px; /* Indent the nested <ol> */
 }
 
+.message li > p {
+  display: inline;
+}
+
 .loadingIndicator {
   opacity: .5;
 }
