@@ -5,29 +5,6 @@ import ReactMarkdown from 'react-markdown';
 import styles from './Chatbot.module.css';
 import { sendMessage } from '@/lib/actions';
 
-
-const formatResponse = (responseText) => {
-  // Replace `###` with <h3> (for headers)
-  responseText = responseText.replace(/^### (.+)$/gm, '<h3>$1</h3>');
-
-  // Replace `**text**` with <strong>text</strong> for bold
-  responseText = responseText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-  // Replace `*text*` with <em>text</em> for italics
-  responseText = responseText.replace(/\*(.+?)\*/g, '<em>$1</em>');
-
-  // Replace inline code `text` with <code>text</code>
-  responseText = responseText.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-  // Replace code blocks (triple backticks) with <pre><code>...</code></pre>
-  responseText = responseText.replace(/```([\s\S]+?)```/g, '<pre><code>$1</code></pre>');
-
-  // Replace line breaks (\n) with <br> for line breaks
-  responseText = responseText.replace(/\n/g, '<br>');
-
-  return responseText;
-};
-
 export default function Chatbot() {
   const [messages, setMessages] = useState([
     { sender: "bot", text: "Hi! How can I help you today?" },

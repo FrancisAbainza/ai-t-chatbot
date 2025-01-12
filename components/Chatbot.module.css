@@ -46,10 +46,10 @@
 .message pre {
   border: 2px solid #3F3F3F;
   border-radius: 12px;
-  white-space: pre-wrap; /* or pre-line; */
-  overflow-x: auto; /* Add horizontal scroll if needed for very long lines of code */
-  max-width: 100%; /* Prevent code blocks from being wider than the message */
-  padding: var(--space-xs); /* Add some padding */
+  white-space: pre-wrap;
+  overflow-x: auto;
+  max-width: 100%; 
+  padding: var(--space-xs); 
 }
 
 .message > * {
@@ -62,11 +62,11 @@
 }
 
 .message li ul {
-  margin-left: 20px; /* Indent the nested <ul> */
+  margin-left: 20px;
 }
 
 .message li ol {
-  margin-left: 20px; /* Indent the nested <ol> */
+  margin-left: 20px;
 }
 
 .message li > p {
