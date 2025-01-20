@@ -1,9 +1,10 @@
 'use client';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import pRetry from "p-retry";
 
 import styles from './Chatbot.module.css';
-import { sendMessageAction } from '@/lib/actions.js';
+import { sendMessage } from '@/lib/chat';
 
 export default function Chatbot() {
   const [messages, setMessages] = useState([
@@ -22,7 +23,17 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      botReply = await sendMessageAction(input, messages);
+      botReply = await pRetry(
+        () => sendMessage(input, messages),
+        {
+          retries: 3,
+          factor: 2,
+          onFailedAttempt: error => {
+            console.warn(`Attempt ${error.attemptNumber} failed. Retrying in ${error.delay}ms...`, error.message);
+          },
+          retryIf: error => error.response?.status === 504 || error.code === 'ECONNABORTED' || error.message.includes('timeout')
+        }
+      );
     } catch (error) {
       botReply = "Oops! Something went wrong. Please try again."
     }
