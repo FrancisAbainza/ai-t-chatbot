@@ -2,7 +2,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 
 export const metadata = {
-  title: "Group ? Chatbot",
+  title: "Group-X Chatbot",
   description: "A school project for Data Structures and Algorithms",
   icons: {
     icon: '/favicon.png',
