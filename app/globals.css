@@ -34,12 +34,10 @@ p, a, button, label, input, span, div {
 
 .footer {
   position: absolute;
+  left: var(--space-xs);
   right: var(--space-xs);
   bottom: var(--space-xs);
-}
-
-.footer > a {
-  text-decoration: underline;
+  text-align: right;
 }
 
 @media only screen and (min-width: 768px) {
