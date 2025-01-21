@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         {children}
-        <p className="footer">©2025 <a href="https://francis-abainza-portfolio.web.app/" target="_blank">Abainza</a>. All rights reserved</p>
+        <p className="footer">©2025 Abainza Barruga Buenaflor Ebero Librada Manalo. All rights reserved</p>
       </body>
     </html>
   );
