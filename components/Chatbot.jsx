@@ -7,22 +7,29 @@ import styles from './Chatbot.module.css';
 import { sendMessage } from '@/lib/chat';
 
 export default function Chatbot() {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState([ // "messages" state array used to store the overall conversation
     { sender: "bot", text: "Hi! How can I help you today?" },
   ]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [input, setInput] = useState(""); // "input" state used to store the user input in the input field
+  const [isLoading, setIsLoading] = useState(false); // "isLoading" state used to conditionally display a loading indicator
 
+  // If the user clicks the "Send" button, do:
   async function handleSend() {
+    // If the input field is empty, do nothing
     if (!input.trim()) return;
 
+    // Construct the new message to be sent to OpenAI API request
     let botReply;
     const newMessage = { sender: "user", text: input };
-    setMessages((prev) => [...prev, newMessage]);
-    setInput("");
-    setIsLoading(true);
+    setMessages((prev) => [...prev, newMessage]); // Add the new message to the "messages" state array
+    setInput(""); // Clear the input field
+    setIsLoading(true); // Set the loading to true to add loading indicator
 
+    // Send an API request to OpenAI API using the sendMessage server-side function 
     try {
+      // If the server-side function was successful, store the API response to the "botReply" variable
+      // If the server-side function throws an error with a status code of 504, an error code of 'ECONNABORTED', or if the error massage has the keyword 'timeout' do: 
+      // • Rerun the server side function again using the p-retry library. Maximum of 3 retries.
       botReply = await pRetry(
         () => sendMessage(input, messages),
         {
@@ -35,13 +42,15 @@ export default function Chatbot() {
         }
       );
     } catch (error) {
+      // If the server-side function fails after the third retry, set the "botReply" as the following:
       botReply = "Oops! Something went wrong. Please try again."
     }
 
-    setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
-    setIsLoading(false);
+    setMessages((prev) => [...prev, { sender: "bot", text: botReply }]); // Add the "botReply" to the "messages" state array
+    setIsLoading(false); // Set the loading to false to remove loading indicator
   }
 
+  // If the user clicks "enter" while focusing on the input field, do:
   function handleKeyDown(event) {
     if (event.key === "Enter") {
       handleSend();
@@ -51,6 +60,7 @@ export default function Chatbot() {
   return (
     <section className={styles.chatbot}>
       <div className={styles.chatWindow}>
+        {/* Display the "messages" state array */}
         {messages.map((msg, idx) => (
           <div
             key={idx}
@@ -64,6 +74,7 @@ export default function Chatbot() {
             <ReactMarkdown>{msg.text}</ReactMarkdown>
           </div>
         ))}
+        {/* Display the loading indicator if there is an ongoing API request */}
         {isLoading && <p className={styles.loadingIndicator}>Typing...</p>}
       </div>
       <div className={styles.inputContainer}>
