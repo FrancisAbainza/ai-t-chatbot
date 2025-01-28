@@ -84,7 +84,7 @@ export default function Chatbot() {
           disabled={isLoading}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type your message..."
+          placeholder="Type your message... (Any language is allowed)"
           className={styles.input}
         />
         <button disabled={isLoading} onClick={handleSend} className={styles.button}>
