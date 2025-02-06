@@ -73,10 +73,6 @@
   display: inline;
 }
 
-.loadingIndicator {
-  opacity: .5;
-}
-
 .inputContainer {
   display: flex;
   border-top: 2px solid #3F3F3F;

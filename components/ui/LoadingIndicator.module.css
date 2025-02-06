@@ -1,0 +1,15 @@
+.loadingIndicator {
+  display: flex;
+  gap: 6px;
+  align-self: flex-start;
+  border-radius: 12px;
+  padding: var(--space-xs);
+  background-color: #1D1D1D;
+}
+
+.loadingDot {
+  background-color: #3F3F3F;
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+}

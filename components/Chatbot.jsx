@@ -2,8 +2,10 @@
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import pRetry from "p-retry";
+import { motion } from 'framer-motion';
 
 import styles from './Chatbot.module.css';
+import LoadingIndicator from './ui/LoadingIndicator.jsx';
 import { sendMessage } from '@/lib/chat';
 
 export default function Chatbot() {
@@ -62,8 +64,10 @@ export default function Chatbot() {
       <div className={styles.chatWindow}>
         {/* Display the "messages" state array */}
         {messages.map((msg, idx) => (
-          <div
+          <motion.div
             key={idx}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             className={styles.message}
             style={{
               alignSelf: msg.sender === "user" ? "flex-end" : "flex-start",
@@ -72,10 +76,10 @@ export default function Chatbot() {
             }}
           >
             <ReactMarkdown>{msg.text}</ReactMarkdown>
-          </div>
+          </motion.div>
         ))}
         {/* Display the loading indicator if there is an ongoing API request */}
-        {isLoading && <p className={styles.loadingIndicator}>Typing...</p>}
+        {isLoading && <LoadingIndicator />}
       </div>
       <div className={styles.inputContainer}>
         <input
